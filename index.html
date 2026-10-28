@@ -261,6 +261,213 @@ button:hover {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.12); }
 }
+
+/* Hinata's Museum */
+.museum-container {
+  width: min(100% - 32px, 1000px);
+  margin: 0 auto;
+  padding: 50px 0 35px;
+  text-align: center;
+}
+
+.museum-container h1 {
+  color: #f5d5c8;
+  font-family: Georgia, serif;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: normal;
+  margin: 12px 0 18px;
+  text-shadow: 0 0 24px rgba(220, 150, 160, 0.25);
+}
+
+.museum-intro {
+  max-width: 580px;
+  margin: 0 auto 35px;
+  line-height: 1.8;
+  color: #e8c9c9;
+}
+
+.museum-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.museum-grid img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  padding: 6px;
+  background: linear-gradient(135deg, #e5c38a, #7f4051, #f4d9bd);
+  border-radius: 5px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.museum-grid img:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 12px 30px rgba(215, 150, 170, 0.22);
+}
+
+.museum-ending {
+  margin: 38px auto 0;
+  max-width: 550px;
+  color: #f0c5b8;
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.8;
+}
+
+.museum-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(12, 5, 10, 0.94);
+  align-items: center;
+  justify-content: center;
+  padding: 55px 18px 25px;
+}
+
+.museum-lightbox img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border: 2px solid #d6b47a;
+  border-radius: 4px;
+  box-shadow: 0 0 35px rgba(214, 180, 122, 0.15);
+}
+
+.museum-lightbox button {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  border: none;
+  background: transparent;
+  color: #fff0e7;
+  font-size: 2.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .museum-container {
+    padding-top: 30px;
+  }
+
+  .museum-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .museum-intro {
+    font-size: 0.95rem;
+  }
+}
+
+
+/* ===== Hinata's Cinematic Museum ===== */
+
+.museum-grid {
+  gap: 22px;
+  perspective: 1000px;
+}
+
+.museum-grid img {
+  opacity: 0;
+  animation: museumPhotoReveal 1s ease forwards;
+  will-change: transform, opacity;
+}
+
+.museum-grid img:nth-child(1)  { animation-delay: 0.08s; }
+.museum-grid img:nth-child(2)  { animation-delay: 0.16s; }
+.museum-grid img:nth-child(3)  { animation-delay: 0.24s; }
+.museum-grid img:nth-child(4)  { animation-delay: 0.32s; }
+.museum-grid img:nth-child(5)  { animation-delay: 0.40s; }
+.museum-grid img:nth-child(6)  { animation-delay: 0.48s; }
+.museum-grid img:nth-child(7)  { animation-delay: 0.56s; }
+.museum-grid img:nth-child(8)  { animation-delay: 0.64s; }
+.museum-grid img:nth-child(9)  { animation-delay: 0.72s; }
+.museum-grid img:nth-child(10) { animation-delay: 0.80s; }
+.museum-grid img:nth-child(11) { animation-delay: 0.88s; }
+.museum-grid img:nth-child(12) { animation-delay: 0.96s; }
+.museum-grid img:nth-child(13) { animation-delay: 1.04s; }
+.museum-grid img:nth-child(14) { animation-delay: 1.12s; }
+.museum-grid img:nth-child(15) { animation-delay: 1.20s; }
+
+@keyframes museumPhotoReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.96);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.museum-grid img:hover {
+  transform: translateY(-6px) scale(1.025);
+  filter: brightness(1.08);
+  box-shadow:
+    0 0 12px rgba(240, 197, 184, 0.25),
+    0 0 32px rgba(215, 150, 170, 0.2);
+}
+
+.museum-container h1 {
+  animation: museumTitleReveal 1.5s ease both;
+}
+
+.museum-intro {
+  animation: museumTitleReveal 1.5s ease 0.25s both;
+}
+
+.museum-ending {
+  animation: museumTitleReveal 1.5s ease 0.5s both;
+}
+
+@keyframes museumTitleReveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.museum-lightbox {
+  backdrop-filter: blur(10px);
+}
+
+.museum-lightbox img {
+  animation: none;
+  transform: none;
+}
+
+.museum-lightbox {
+  backdrop-filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .museum-grid img,
+  .museum-container h1,
+  .museum-intro,
+  .museum-ending,
+  .museum-lightbox img {
+    animation: none;
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
 </style>
 </head>
 
@@ -424,8 +631,49 @@ button:hover {
     I'd still want it to begin with you.
   </p>
 </div>
-<button onclick="showScreen('next')">There is something more...</button>
+<button onclick="showScreen('museum')">There is something more...</button>
   </section>
+
+  
+<section id="museum" class="screen">
+    <p style="color:white; font-size:20px;">MUSEUM TEST</p>
+  <div class="museum-container">
+    <p class="bus143-caption">A little place made just for you</p>
+
+    <h1>Hinata’s Museum</h1>
+
+    <p class="museum-intro">
+      Fifteen little windows into the beauty I see in you.
+      Every picture holds a memory I want to keep forever.
+    </p>
+
+    <div class="museum-grid">
+      <img src="museum/photo-01.jpeg.jpeg" alt="Memory 1">  
+      <img src="museum/photo-02.jpeg.jpeg" alt="Memory 2">
+      <img src="museum/photo-03.jpeg.jpeg" alt="Memory 3">
+      <img src="museum/photo-04.jpeg.jpeg" alt="Memory 4">
+      <img src="museum/photo-05.jpeg.jpeg" alt="Memory 5">
+      <img src="museum/photo-06.jpeg.jpeg" alt="Memory 6"> 
+      <img src="museum/photo-07.jpeg.jpeg" alt="Memory 7">
+      <img src="museum/photo-08.jpeg.jpeg" alt="Memory 8"> 
+      <img src="museum/photo-09.jpeg.jpeg" alt="Memory 9">
+      <img src="museum/photo-10.jpeg.jpeg" alt="Memory 10">
+      <img src="museum/photo-11.jpeg.jpeg" alt="Memory 11">
+      <img src="museum/photo-12.jpeg.jpeg" alt="Memory 12">
+      <img src="museum/photo-13.jpeg.jpeg" alt="Memory 13">
+      <img src="museum/photo-14.jpeg.jpeg" alt="Memory 14">
+      <img src="museum/photo-15.jpeg.jpeg" alt="Memory 15">
+    </div>
+
+    <p class="museum-ending">
+      Of all the beautiful things in this world,
+      you will always be my favourite.
+    </p>
+  </div>
+
+  
+</section>
+
 
   <section class="screen" id="next">
     <div class="heart">♥</div>
@@ -475,6 +723,9 @@ for (let i = 0; i < 32; i++) {
   dot.style.width = dot.style.height = (2 + Math.random() * 3) + "px";
   particles.appendChild(dot);
 }
+
+
+
 </script>
 </body>
 </html>
