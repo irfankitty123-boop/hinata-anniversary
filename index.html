@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For Hinata — Eight Years of Us</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #170910;
+  color: #fff0ed;
+  font-family: Georgia, serif;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 35%, #69253f 0%, #321322 42%, #170910 78%);
+  z-index: -2;
+}
+
+#particles {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  bottom: -20px;
+  width: 3px;
+  height: 3px;
+  background: #f4c9a0;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #f4c9a0;
+  animation: floatUp linear infinite;
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0; }
+  15% { opacity: .7; }
+  85% { opacity: .5; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 22px;
+  text-align: center;
+}
+
+.screen {
+  display: none;
+  width: 100%;
+  max-width: 620px;
+  animation: reveal 1.5s ease both;
+}
+
+.screen.active { display: block; }
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  color: #e8b8c7;
+  font: 11px Arial, sans-serif;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+h1 {
+  font-size: clamp(43px, 10vw, 76px);
+  font-weight: normal;
+  line-height: 1.12;
+  margin: 28px 0;
+  text-shadow: 0 0 35px #d77b9c55;
+}
+
+p {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #eedce2;
+}
+
+.gold { color: #f2c999; }
+
+button {
+  margin-top: 28px;
+  padding: 15px 28px;
+  color: #ffe6c6;
+  background: #702b47;
+  border: 1px solid #e4bb96;
+  border-radius: 40px;
+  font: 15px Georgia, serif;
+  cursor: pointer;
+  transition: background .3s, transform .3s, box-shadow .3s;
+}
+
+button:hover {
+  background: #8a3657;
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px #e8a7c333;
+}
+
+.heart {
+  color: #f1b9ca;
+  font-size: 27px;
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+.small {
+  font: 11px Arial, sans-serif;
+  letter-spacing: 2px;
+  color: #cfa9b5;
+  margin-top: 40px;
+}
+
+.story-line {
+  opacity: 0;
+  animation: reveal 1.3s ease forwards;
+}
+
+.story-line:nth-child(2) { animation-delay: .5s; }
+.story-line:nth-child(3) { animation-delay: 1.4s; }
+.story-line:nth-child(4) { animation-delay: 2.3s; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+
+/* Bus 143 cinematic anime scene */
+.bus143-scene {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 28px auto;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid rgba(235, 190, 150, 0.35);
+  box-shadow: 0 0 35px rgba(180, 65, 95, 0.2);
+  animation: sceneFadeIn 2s ease both;
+}
+
+.bus143-scene img {
+  display: block;
+  width: 100%;
+  height: auto;
+  animation: cinematicZoom 18s ease-in-out infinite alternate;
+}
+
+.bus143-caption {
+  text-align: center;
+  color: #f2d5c4;
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-style: italic;
+  letter-spacing: 1px;
+  margin: 18px 12px;
+  line-height: 1.8;
+}
+
+@keyframes cinematicZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.09); }
+}
+
+@keyframes sceneFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* Our Journey Together */
+.relationship-card {
+  max-width: 560px;
+  margin: 28px auto;
+  padding: 26px 20px;
+  border: 1px solid rgba(232, 177, 155, 0.35);
+  border-radius: 18px;
+  background: linear-gradient(
+    145deg,
+    rgba(94, 27, 51, 0.65),
+    rgba(27, 12, 25, 0.92)
+  );
+  box-shadow: 0 0 35px rgba(180, 65, 95, 0.16);
+  animation: journeyFadeIn 1.5s ease both;
+}
+
+.relationship-heart {
+  font-size: 42px;
+  margin: 10px 0 18px;
+  animation: heartPulse 2s ease-in-out infinite;
+}
+
+.relationship-card h3 {
+  color: #f4d4c5;
+  font-family: Georgia, serif;
+  font-size: 1.7rem;
+  font-weight: normal;
+  margin: 12px 0 18px;
+}
+
+.relationship-card p {
+  color: #ead8d8;
+  font-family: Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.9;
+  margin: 12px 0;
+}
+
+.relationship-divider {
+  width: 65px;
+  height: 1px;
+  background: #d9a783;
+  margin: 22px auto;
+}
+
+@keyframes journeyFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heartPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop preload="none">
+  <source src="audio/First-Sight.mp3" type="audio/mpeg">
+</audio>
+
+<button
+  id="musicButton"
+  type="button"
+  onclick="
+    const music = document.getElementById('bgMusic');
+    if (music.paused) {
+      music.play().then(() => {
+        this.textContent = '♫ Pause music';
+      }).catch(() => {
+        this.textContent = 'Tap to play music';
+      });
+    } else {
+      music.pause();
+      this.textContent = '♫ Play music';
+    }
+  "
+  style="
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 9999;
+    background: #5b2038;
+    color: #ffe8dc;
+    border: 1px solid #c99b85;
+    border-radius: 30px;
+    padding: 12px 18px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  "
+>
+  ♫ Play music
+</button>
+
+<div id="particles"></div>
+
+<main>
+  <section class="screen active" id="opening">
+    <div class="eyebrow">A little world, just for you</div>
+    <h1>For <span class="gold">Hinata</span></h1>
+    <p>Some stories are too special<br>to fit inside ordinary words.</p>
+    <div class="heart">♥</div>
+    <button onclick="showScreen('beginning')">
+      Begin our story
+    </button>
+    <div class="small">MADE WITH LOVE · JUST FOR YOU</div>
+  </section>
+
+  <section class="screen" id="beginning">
+    <div class="eyebrow">Chapter one</div>
+    <h1>Eight years<br>of <span class="gold">us.</span></h1>
+    <p class="story-line">I still remember that bus.</p>
+    <p class="story-line">I noticed your eyes before I knew how much you would mean to me.</p>
+    <p class="story-line">And somehow, that moment became the beginning of our story.</p>
+
+<div class="bus143-scene">
+  <img
+    src="images/bus-143.png.png"
+    alt="Anime illustration of the first meeting on bus 143"
+  />
+</div>
+
+<p class="bus143-caption">
+  Bus 143… The day everything changed.
+</p>
+    <button onclick="showScreen('together')">And then came us...
+<div style="margin: 28px auto; text-align: center;">
+  <p class="bus143-caption">
+    Before you left that day, you gave me something…
+  </p>
+
+  <button
+    type="button"
+    onclick="
+      document.getElementById('first-letter').style.display = 'block';
+      this.style.display = 'none';
+    "
+    style="font-size: 1.1rem;"
+  >
+    ✉ Open your little letter
+  </button>
+
+  <div
+    id="first-letter"
+    style="
+      display: none;
+      margin: 24px auto;
+      padding: 32px 20px;
+      max-width: 320px;
+      background: #fff0df;
+      color: #592735;
+      border-radius: 5px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      animation: sceneFadeIn 1.2s ease both;
+    "
+  >
+    <p style="font-family: Georgia, serif; font-style: italic;">
+      A little letter from you…
+    </p>
+
+    <div style="
+      font-family: Georgia, serif;
+      font-size: 3.5rem;
+      margin: 18px 0;
+      color: #8f2948;
+    ">hi</div>
+
+    <p style="font-family: Georgia, serif; font-style: italic;">
+      Just one word… and my heart never forgot.
+    </p>
+  </div>
+</div>
+</button>
+  </section>
+
+  <section class="screen" id="together">
+    <div class="eyebrow">Through everything</div>
+    <h1>Still <span class="gold">together.</span></h1>
+    <p>We faced difficulties that weren't always easy.</p>
+    <p>But we stood beside each other and defended the love we believed in.</p>
+    <p>And today, I would still choose to walk beside you.</p>
+    
+<div class="relationship-card">
+  <div class="relationship-heart">♥</div>
+
+  <h3>Our Journey Together</h3>
+
+  <div class="relationship-divider"></div>
+
+  <p>
+    From that ordinary bus ride to the memories
+    we carry today, our story became something
+    I never want to lose.
+  </p>
+
+  <p>
+    We faced difficulties that weren't always easy.
+    But we stood beside each other and defended
+    the love we believed in.
+  </p>
+
+  <p>
+    Through every smile, every difficult day,
+    and every little moment, I kept finding
+    another reason to choose you.
+  </p>
+
+  <div class="relationship-divider"></div>
+
+  <p style="font-style: italic; color: #f0c5b8;">
+    And if I could live it all again,
+    I'd still want it to begin with you.
+  </p>
+</div>
+<button onclick="showScreen('next')">There is something more...</button>
+  </section>
+
+  <section class="screen" id="next">
+    <div class="heart">♥</div>
+    <h1>One lifetime<br><span class="gold">ahead.</span></h1>
+    <p>Eight years of memories.</p>
+    <p>So many reasons to be grateful for you.</p>
+    <p>And one very special question still waiting for its moment.</p>
+    <button onclick="showScreen('ending')">Continue, Hinata</button>
+  </section>
+
+  <section class="screen" id="ending">
+    <div class="eyebrow">For my favourite person</div>
+    <h1>Our story<br>isn't <span class="gold">over.</span></h1>
+    <p>This is only the beginning of the next chapter.</p>
+    <p>There is much more waiting for us, my love.</p>
+    <div class="heart">♥</div>
+    <p class="small">THIS IS JUST THE FIRST PREVIEW</p>
+    <button onclick="showScreen('opening')">Experience it again</button>
+  </section>
+</main>
+
+<script>
+function showScreen(id) {
+  const current = document.querySelector(".screen.active");
+  const next = document.getElementById(id);
+
+  if (!next || next === current) return;
+
+  current.classList.remove("active");
+  next.classList.remove("active");
+
+  // Restart the entrance animation.
+  void next.offsetWidth;
+  next.classList.add("active");
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+const particles = document.getElementById("particles");
+
+for (let i = 0; i < 32; i++) {
+  const dot = document.createElement("span");
+  dot.className = "particle";
+  dot.style.left = Math.random() * 100 + "%";
+  dot.style.animationDelay = Math.random() * 12 + "s";
+  dot.style.animationDuration = (9 + Math.random() * 12) + "s";
+  dot.style.width = dot.style.height = (2 + Math.random() * 3) + "px";
+  particles.appendChild(dot);
+}
+</script>
+</body>
+</html>
