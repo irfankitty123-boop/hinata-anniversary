@@ -468,6 +468,452 @@ button:hover {
   }
 }
 
+
+/* Floating Cupid background */
+#disclaimer {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+#disclaimer .cupid-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+#disclaimer .cupid {
+  position: absolute;
+  display: block;
+  opacity: 0.24;
+  font-size: 42px;
+  animation: cupidFloat 7s ease-in-out infinite;
+}
+
+#disclaimer .cupid-one {
+  top: 8%;
+  left: 7%;
+}
+
+#disclaimer .cupid-two {
+  top: 24%;
+  right: 8%;
+  animation-delay: -2s;
+}
+
+#disclaimer .cupid-three {
+  top: 48%;
+  left: 4%;
+  animation-delay: -4s;
+}
+
+#disclaimer .cupid-four {
+  bottom: 15%;
+  right: 8%;
+  animation-delay: -1s;
+}
+
+#disclaimer .cupid-five {
+  bottom: 5%;
+  left: 30%;
+  animation-delay: -3s;
+}
+
+@keyframes cupidFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #disclaimer .cupid {
+    animation: none;
+  }
+}
+
+
+#secret-gate #secretCode:focus {
+  border-color: #ff5c9a;
+  box-shadow: 0 0 24px rgba(255, 92, 154, 0.55);
+}
+
+#secret-gate #secretCode::placeholder {
+  color: #b47791;
+  opacity: 1;
+}
+
+.question-card {
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.question-fade-out {
+  opacity: 0;
+  transform: translateY(-12px);
+  pointer-events: none;
+}
+
+.question-fade-in {
+  animation: questionFadeIn 1s ease both;
+}
+
+@keyframes questionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Keep the final story centered in the viewport */
+#final-message.screen.active {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 28px 16px 50px;
+  box-sizing: border-box;
+  position: relative;
+  left: auto;
+  right: auto;
+  transform: none;
+}
+
+#final-message.screen.active > .secret-card.comic-story {
+  display: block;
+  float: none;
+  position: relative;
+  left: auto;
+  right: auto;
+  transform: none;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+#final-message .comic-image-frame,
+#final-message .comic-caption,
+#final-message .comic-finale {
+  float: none;
+  position: relative;
+  left: auto;
+  right: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 600px) {
+  #final-message.screen.active {
+    padding: 18px 12px 36px;
+  }
+
+  #final-message.screen.active > .secret-card.comic-story {
+    padding: 22px 14px;
+  }
+}
+
+#final-message .comic-caption {
+  width: 100%;
+  max-width: 580px;
+  box-sizing: border-box;
+  margin: 28px auto;
+  padding: 26px 24px;
+  text-align: left;
+  background: linear-gradient(135deg, #351020, #1c0b16);
+  border: 1px solid rgba(255, 195, 215, 0.35);
+  border-left: 4px solid #dba0b5;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.final-comic-image {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  margin: 30px auto;
+  border-radius: 14px;
+  box-shadow: 0 0 35px rgba(219, 160, 181, 0.2);
+  border: 1px solid rgba(219, 160, 181, 0.35);
+}
+
+
+#final-message .comic-story {
+  background: linear-gradient(
+    180deg,
+    rgba(48, 12, 29, 0.96),
+    rgba(18, 8, 17, 0.98)
+  );
+  border: 1px solid rgba(235, 185, 200, 0.28);
+  border-radius: 22px;
+  padding: 28px 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+#final-message .comic-intro {
+  max-width: 480px;
+  margin: 16px auto 28px;
+  line-height: 1.9;
+  color: #f3dfe6;
+}
+
+#final-message .comic-image-frame {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 220, 230, 0.22),
+    rgba(110, 35, 65, 0.12)
+  );
+  box-shadow: 0 0 35px rgba(215, 140, 170, 0.14);
+}
+
+#final-message .final-comic-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  #final-message .comic-story {
+    padding: 22px 12px;
+    border-radius: 16px;
+  }
+}
+
+
+#final-message .comic-caption {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  box-sizing: border-box;
+  margin: 26px auto;
+  padding: 28px 24px 28px 30px;
+  overflow: hidden;
+  text-align: left;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(183, 91, 125, 0.13), transparent 55%),
+    linear-gradient(145deg, #24121d, #100b12 75%);
+  border: 0;
+  border-left: 2px solid rgba(230, 170, 190, 0.65);
+  border-radius: 3px 14px 14px 3px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+}
+
+#final-message .comic-caption::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, transparent 50%, rgba(230, 170, 190, 0.08) 50%);
+  pointer-events: none;
+}
+
+#final-message .comic-number {
+  display: block;
+  margin-bottom: 14px;
+  color: #dca5b9;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  line-height: 1.7;
+}
+
+#final-message .comic-caption h2 {
+  margin: 0 0 16px;
+  color: #fff0f4;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.35rem, 5vw, 1.8rem);
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+#final-message .comic-caption p {
+  margin: 0;
+  color: #d9cbd1;
+  font-size: 0.98rem;
+  line-height: 1.95;
+}
+
+@media (max-width: 480px) {
+  #final-message .comic-caption {
+    margin: 20px auto;
+    padding: 23px 18px 24px 22px;
+  }
+
+  #final-message .comic-caption p {
+    font-size: 0.92rem;
+    line-height: 1.85;
+  }
+}
+
+
+#marriage-countdown {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  min-height: 85vh;
+  margin: 0 auto;
+  padding: 24px 16px;
+  box-sizing: border-box;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff0f5;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(116, 35, 72, 0.38), transparent 60%),
+    linear-gradient(180deg, #100912 0%, #210c1b 55%, #09070d 100%);
+  border: 1px solid rgba(225, 167, 193, 0.18);
+  border-radius: 22px;
+}
+
+#marriage-countdown.active {
+  display: flex;
+  animation: reveal 1.5s ease both;
+}
+
+#marriage-countdown .countdown-scene {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  text-align: center;
+  animation: countdown-glow 4s ease-in-out infinite;
+}
+
+#marriage-countdown .countdown-eyebrow {
+  color: #e5a8c0;
+  font-size: 0.72rem;
+  letter-spacing: 5px;
+}
+
+#marriage-countdown .countdown-heading {
+  max-width: 600px;
+  margin: 24px auto;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 7vw, 3.6rem);
+  line-height: 1.2;
+  text-shadow: 0 0 28px rgba(231, 154, 188, 0.25);
+}
+
+#marriage-countdown .countdown-message {
+  max-width: 450px;
+  margin: 0 auto 32px;
+  color: #dbc5d0;
+  line-height: 1.9;
+}
+
+#marriage-countdown .wedding-date {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 3vw, 22px);
+  margin: 34px 0;
+  color: #ffe0ec;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  letter-spacing: 2px;
+  text-shadow:
+    0 0 12px rgba(255, 183, 211, 0.75),
+    0 0 42px rgba(220, 110, 164, 0.45);
+}
+
+#marriage-countdown .date-divider {
+  color: #b97798;
+  font-size: 0.65em;
+}
+
+#marriage-countdown .countdown-label {
+  color: #c99bb1;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  line-height: 1.8;
+}
+
+#marriage-countdown .countdown-timer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  max-width: 520px;
+  margin: 28px auto;
+}
+
+#marriage-countdown .countdown-unit {
+  padding: 18px 4px;
+  background: rgba(255, 226, 238, 0.045);
+  border: 1px solid rgba(230, 173, 198, 0.22);
+  border-radius: 12px;
+  box-shadow: inset 0 0 22px rgba(198, 92, 141, 0.04);
+}
+
+#marriage-countdown .countdown-unit span {
+  display: block;
+  color: #ffe8f0;
+  font-size: clamp(1.5rem, 5vw, 2.4rem);
+  font-variant-numeric: tabular-nums;
+}
+
+#marriage-countdown .countdown-unit small {
+  display: block;
+  margin-top: 8px;
+  color: #c99bb1;
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+}
+
+#marriage-countdown .countdown-footer {
+  margin-top: 34px;
+  color: #e7c1d1;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+}
+
+@keyframes countdown-glow {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.12); }
+}
+
+@media (max-width: 420px) {
+  #marriage-countdown {
+    min-height: 80vh;
+    padding: 24px 10px;
+    border-radius: 16px;
+  }
+
+  #marriage-countdown .countdown-timer {
+    gap: 5px;
+  }
+
+  #marriage-countdown .countdown-unit {
+    padding: 15px 2px;
+  }
+
+  #marriage-countdown .countdown-unit small {
+    font-size: 0.52rem;
+    letter-spacing: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #marriage-countdown .countdown-scene {
+    animation: none;
+  }
+}
+
+
 </style>
 </head>
 
@@ -669,10 +1115,199 @@ button:hover {
       Of all the beautiful things in this world,
       you will always be my favourite.
     </p>
-  </div>
 
-  
+    <div class="museum-continue">
+      <button onclick="showScreen('disclaimer')">
+        Continue, My Love ❤️
+      </button>
+    </div>
+  </div>
 </section>
+
+
+
+<section class="screen" id="disclaimer"> 
+    
+<div class="cupid-background" aria-hidden="true">
+  <span class="cupid cupid-one">🏹</span>
+  <span class="cupid cupid-two">💘</span>
+  <span class="cupid cupid-three">👼🏻</span>
+  <span class="cupid cupid-four">💕</span>
+  <span class="cupid cupid-five">🏹</span>
+</div>
+
+  <div class="secret-card">
+    <p class="secret-label">⚠️ A LITTLE WARNING ⚠️</p>
+
+    <h1>Hinata, One Little Thing… 🤫</h1>
+
+    <p>
+      Hey, my girl! ❤️ Before you continue, I need you
+      to promise me one thing.
+    </p>
+
+    <p>
+      <strong>Please don't open the next part in front of your family!</strong>
+      🙈😂
+    </p>
+
+    <p>
+      Some questions are personal, some are cheeky, and
+      a few reveal our little secrets.
+    </p>
+
+    <p>
+      I don't want your family teasing you about our
+      private moments! 😭😂
+    </p>
+
+    <p>
+      Find a little privacy, make sure nobody is looking
+      over your shoulder, and then continue.
+    </p>
+
+    <p class="secret-ending">
+      You've been warned, baby! 🤭❤️
+    </p>
+
+    <button onclick="showScreen('secret-gate')">
+      I'm Alone, Let's Continue ❤️
+    </button>
+  </div>
+</section>
+
+
+<section class="screen" id="secret-gate">
+  <div class="secret-card">
+    <p class="secret-label">JUST BETWEEN US ❤️</p>
+
+    <h1>One Little Secret…</h1>
+
+    <p>
+      Before you enter, my love, there's one little
+      code only you should know. 🤫
+    </p>
+
+    <input
+      type="password"
+      id="secretCode"  
+style="width: 100%; box-sizing: border-box; min-height: 60px; padding: 14px 16px; font-size: 20px; border: 2px solid #e8a0b5; border-radius: 16px; background: rgba(255, 240, 246, 0.95); color: #7a183d; box-shadow: 0 0 18px rgba(232, 160, 181, 0.35); outline: none; transition: box-shadow 0.3s ease, border-color 0.3s ease;"
+
+      placeholder="♡ Enter our secret code ♡"
+      inputmode="numeric"
+      autocomplete="off"
+    >
+
+    <button onclick="unlockQuestions()">
+      Unlock Our Secrets ❤️
+    </button>
+
+    <p id="codeMessage" aria-live="polite"></p>
+  </div>
+</section>
+
+<section class="screen" id="questions">
+  <div class="secret-card">
+    <p class="secret-label">JUST BETWEEN US ❤️</p>
+
+    <h1>Our Little Secrets</h1>
+
+    <p>
+      You made it, Hinata! ❤️ Now let's see how well
+      you remember our beautiful journey together.
+    </p>
+
+    <p>
+      Get ready for some questions about us. 🤭💕
+    </p>
+  
+   <div class="question-card" id="question1">
+      <p class="secret-label">QUESTION 01 ❤️</p>
+
+      <h2>Where did I first notice your beautiful eyes?</h2>
+
+      <div class="question-options">
+        <button onclick="answerQuestion1()">
+          A. On a bus
+        </button>
+
+        <button onclick="document.getElementById('q1Feedback').textContent='Not quite, baby! 🤭 Try another answer.'">
+          B. At school
+        </button>
+
+        <button onclick="document.getElementById('q1Feedback').textContent='Not quite, baby! 🤭 Try another answer.'">
+          C. At a family event
+        </button>
+
+        <button onclick="document.getElementById('q1Feedback').textContent='Not quite, baby! 🤭 Try another answer.'">
+          D. At a friend’s house
+        </button>
+      </div>
+
+      <p id="q1Feedback" aria-live="polite"></p>
+    </div>
+
+
+
+    <div class="question-card" id="question2" style="display: none;">
+      <p class="secret-label">QUESTION 02 🥛</p>
+
+      <h2>When we meet in person, what do I do most of the time?</h2>
+
+      <div class="question-options">
+        <button onclick="document.getElementById('q2Feedback').textContent='A gentleman, at least for a moment! 😂❤️'">
+          A. Hold your hand romantically
+        </button>
+
+        <button onclick="document.getElementById('q2Feedback').textContent='Hugs are always part of the plan! 🤗'">
+          B. Give you a big hug
+        </button>
+
+        <button onclick="document.getElementById('q2Feedback').textContent='Trying to act innocent, are we? 😂'">
+          C. Tease you until you laugh
+        </button>
+
+        <button class="dark-option" onclick="answerQuestion2()">
+          🥛 D. Conduct a very serious milk inspection
+        </button>
+      </div>
+
+      <p id="q2Feedback" aria-live="polite"></p>
+    </div>
+
+    <div class="question-card" id="question3" style="display: none;">
+  <p class="secret-label">QUESTION 03 ❤️</p>
+ <h2>What kind of future would make you happiest for us, my love?</h2>
+  <p>Choose the future that feels right in your heart, baby. ❤️</p>
+
+<div class="question-options">
+  <button onclick="answerQuestion3('business')">
+    A. Build our own business together
+  </button>
+
+  <button onclick="answerQuestion3('family')">
+    B. Create a beautiful home and family
+  </button>
+
+  <button onclick="answerQuestion3('travel')">
+    C. Travel the world and make memories
+  </button>
+
+  <button onclick="answerQuestion3('dreams')">
+    D. Grow together and achieve all our dreams
+  </button>
+</div>
+
+<p id="q3Feedback" aria-live="polite"></p>
+<button id="q3Continue" style="display: none;" onclick="showFinalMessage()">
+  There's one more thing I want you to know... ❤️
+</button>
+</div>
+
+</div>
+</section>
+
+
 
 
   <section class="screen" id="next">
@@ -694,6 +1329,140 @@ button:hover {
     <button onclick="showScreen('opening')">Experience it again</button>
   </section>
 </main>
+
+<section class="screen" id="final-message">
+  <div class="secret-card comic-story">
+
+    <p class="secret-label">OUR STORY • OUR FOREVER ❤️</p>
+
+    <h1>Eight Years of Us</h1>
+
+    <p class="comic-intro">
+      Hinata, every love story has a beginning.
+      This is ours, and my favourite chapter is still ahead. ❤️
+    </p>
+
+    <div class="comic-image-frame">
+      <img
+        src="final-comic.png.jpg"
+        alt="Anime manga comic illustrating our love story, from the first moment on a bus to our dreams of a future together"
+        class="final-comic-image"
+      >
+    </div>
+
+    <div class="comic-caption">
+      <span class="comic-number">01 — THE BEGINNING</span>
+      <h2>The Eyes That Started Everything</h2>
+      <p>
+        I never knew that one little moment on a bus would
+        become the beginning of my favourite story.
+        Your eyes caught my attention, but your heart gave
+        me a reason to stay. ❤️
+      </p>
+    </div>
+
+    <div class="comic-caption">
+      <span class="comic-number">02 — THROUGH EVERYTHING</span>
+      <h2>We Kept Choosing Each Other</h2>
+      <p>
+        Even when life was difficult and others didn't
+        understand us, we kept finding reasons to stand
+        beside each other.
+      </p>
+    </div>
+
+    <div class="comic-caption">
+      <span class="comic-number">03 — GROWING TOGETHER</span>
+      <h2>You Helped Me See a Better Future</h2>
+      <p>
+        You didn't make me perfect, baby.
+        You helped me realise that I could become better.
+        I want to be the man who deserves the future
+        we're dreaming of.
+      </p>
+    </div>
+
+    <div class="comic-caption">
+      <span class="comic-number">04 — EVERY LIFETIME</span>
+      <h2>I Would Still Choose You</h2>
+      <p>
+        If life gave me a thousand chances to start over,
+        I'd still find my way to you, fall in love with you
+        all over again, and choose you in every lifetime.
+      </p>
+    </div>
+
+    <div class="comic-finale">
+      <p class="comic-number">OUR NEXT CHAPTER</p>
+      <h2>Hinata, My Forever ❤️</h2>
+
+      <p>
+        One day, I'll hold your hand as your husband,
+        look into those beautiful eyes that first stole
+        my heart, and thank the universe for giving me
+        a love like ours.
+      </p>
+
+      <p>
+        Until then, and for every day after,
+        my heart is yours, Hinata.
+      </p>
+
+      
+<h2 class="forever-title">Forever and always. ❤️</h2>
+    </div>
+
+    <button class="next-chapter-btn" onclick="showScreen('marriage-countdown')">
+      Our Next Chapter Begins
+    </button>
+
+  </div>
+</section>
+
+
+<section class="screen" id="marriage-countdown">
+  <div class="countdown-scene">
+    <p class="countdown-eyebrow">OUR NEXT CHAPTER</p>
+
+    <h1 class="countdown-heading">The Day Our Forever Begins</h1>
+
+    <p class="countdown-message">
+      Hinata, every road we've travelled has led us
+      toward the life we're going to build together.
+    </p>
+
+    <div class="wedding-date">
+      <span>19</span><span class="date-divider">·</span>
+      <span>08</span><span class="date-divider">·</span>
+      <span>2027</span>
+    </div>
+
+    <p class="countdown-label">UNTIL WE BEGIN OUR MARRIED LIFE</p>
+
+    <div class="countdown-timer">
+      <div class="countdown-unit">
+        <span id="countdown-days">---</span>
+        <small>DAYS</small>
+      </div>
+      <div class="countdown-unit">
+        <span id="countdown-hours">--</span>
+        <small>HOURS</small>
+      </div>
+      <div class="countdown-unit">
+        <span id="countdown-minutes">--</span>
+        <small>MINUTES</small>
+      </div>
+      <div class="countdown-unit">
+        <span id="countdown-seconds">--</span>
+        <small>SECONDS</small>
+      </div>
+    </div>
+
+    <p class="countdown-footer">Every second brings us closer to forever. ❤️</p>
+  </div>
+</section>
+
+
 
 <script>
 function showScreen(id) {
@@ -724,6 +1493,119 @@ for (let i = 0; i < 32; i++) {
   particles.appendChild(dot);
 }
 
+
+
+function unlockQuestions() {
+  const input = document.getElementById("secretCode");
+  const message = document.getElementById("codeMessage");
+
+  if (!input || !message) return;
+
+  if (input.value.trim() === "0219") {
+    showScreen("questions");
+  } else {
+    message.textContent = "Not quite, my love. Try again ❤️";
+    input.value = "";
+    input.focus();
+  }
+}
+
+function answerQuestion1() {
+  const q1 = document.getElementById("question1");
+  const q2 = document.getElementById("question2");
+  const feedback = document.getElementById("q1Feedback");
+
+  if (!q1 || !q2 || !feedback) return;
+
+  feedback.textContent =
+    "Of course, my love! ❤️ That bus journey became a special memory for me.";
+
+  q1.classList.add("question-fade-out");
+
+  setTimeout(() => {
+    q1.style.display = "none";
+    q2.style.display = "block";
+    q2.classList.add("question-fade-in");
+  }, 1000);
+}
+
+function answerQuestion2() {
+  const q2 = document.getElementById("question2");
+  const q3 = document.getElementById("question3");
+
+  if (!q2 || !q3) return;
+
+  const feedback = document.getElementById("q2Feedback");
+
+  if (feedback) {
+    feedback.textContent =
+      "🥛 MILK INSPECTION! CAUGHT IN 4K! 🚨😂 You know exactly what you did, baby!";
+  }
+
+  q2.classList.add("question-fade-out");
+
+  setTimeout(() => {
+    q2.style.display = "none";
+    q3.style.display = "block";
+    q3.classList.add("question-fade-in");
+  }, 1000);
+}
+
+function answerQuestion3(choice) {
+  const replies = {
+    business: "One day, baby, I hope we look back at the little dream we started with and smile at how far we've come. We'll build it with love, patience, and teamwork. ❤️",
+    family: "My love, I dream of a home filled with peace, laughter, and the warmth of our little family. With you, even ordinary days could become my favourite memories. ❤️",
+    travel: "Then let's make a lifetime of memories, baby. New places, unexpected adventures, silly moments, and your hand in mine wherever life takes us. ❤️",
+    dreams: "That's what I want too, Hinata. Not just to fall in love and stay there, but to keep growing, supporting each other, and turning our dreams into our life together. ❤️"
+  };
+
+  const feedback = document.getElementById("q3Feedback");
+  const continueButton = document.getElementById("q3Continue");
+
+  if (!feedback || !continueButton || !replies[choice]) return;
+
+  feedback.textContent = replies[choice];
+  continueButton.style.display = "block";
+}
+
+function showFinalMessage() {
+  showScreen("final-message");
+}
+
+
+function updateMarriageCountdown() {
+  const weddingDate = new Date("2027-08-19T00:00:00+05:30").getTime();
+  const now = Date.now();
+  const difference = weddingDate - now;
+
+  const daysElement = document.getElementById("countdown-days");
+  const hoursElement = document.getElementById("countdown-hours");
+  const minutesElement = document.getElementById("countdown-minutes");
+  const secondsElement = document.getElementById("countdown-seconds");
+
+  if (!daysElement || !hoursElement || !minutesElement || !secondsElement) {
+    return;
+  }
+
+  if (difference <= 0) {
+    daysElement.textContent = "00";
+    hoursElement.textContent = "00";
+    minutesElement.textContent = "00";
+    secondsElement.textContent = "00";
+    return;
+  }
+
+  daysElement.textContent = Math.floor(difference / 86400000);
+  hoursElement.textContent = Math.floor((difference % 86400000) / 3600000)
+    .toString().padStart(2, "0");
+  minutesElement.textContent = Math.floor((difference % 3600000) / 60000)
+    .toString().padStart(2, "0");
+  secondsElement.textContent = Math.floor((difference % 60000) / 1000)
+    .toString().padStart(2, "0");
+}
+
+updateMarriageCountdown();
+setInterval(updateMarriageCountdown, 1000);
 
 
 </script>
