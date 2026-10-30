@@ -604,7 +604,7 @@ button:hover {
 #final-message .comic-caption,
 #final-message .comic-finale {
   float: none;
-  position: relative;
+  position: center;
   left: auto;
   right: auto;
   margin-left: auto;
@@ -783,7 +783,7 @@ button:hover {
 
 #marriage-countdown.active {
   display: flex;
-  animation: reveal 1.5s ease both;
+  animation: countdownEntrance 1.6s ease both;
 }
 
 #marriage-countdown .countdown-scene {
@@ -819,6 +819,7 @@ button:hover {
 
 #marriage-countdown .wedding-date {
   display: flex;
+  animation: weddingDateGlow 3s ease-in-out infinite;
   justify-content: center;
   align-items: center;
   gap: clamp(10px, 3vw, 22px);
@@ -882,6 +883,34 @@ button:hover {
   font-style: italic;
 }
 
+@keyframes countdownEntrance {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(20px);
+    filter: blur(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes weddingDateGlow {
+  0%, 100% {
+    text-shadow:
+      0 0 12px rgba(255, 183, 211, 0.55),
+      0 0 30px rgba(220, 110, 164, 0.25);
+  }
+
+  50% {
+    text-shadow:
+      0 0 20px rgba(255, 183, 211, 0.95),
+      0 0 55px rgba(220, 110, 164, 0.65);
+  }
+}
+
 @keyframes countdown-glow {
   0%, 100% { filter: brightness(1); }
   50% { filter: brightness(1.12); }
@@ -914,8 +943,126 @@ button:hover {
   }
 }
 
+.screen.active {
+  scroll-margin-top: 0;
+}
+
+main:has(#beginning.active) {
+  display: block;
+  min-height: auto;
+  padding: 10px 22px 30px;
+  text-align: center;
+}
+
+main:has(#beginning.active) #beginning {
+  margin: 0 auto;
+  padding: 0;
+  transform: none;
+}
+
+/* Remove the empty main screen when the final message appears */
+body:has(#final-message.active) main {
+  display: none;
+}
+
+body:has(#marriage-countdown.active) main {
+  display: none;
+}
+
+/* CINEMATIC STORY CHAPTERS */
+
+.cinematic-story {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 32px 24px;
+  text-align: center;
+}
+
+.story-chapter {
+  display: none;
+  min-height: 320px;
+  opacity: 0;
+}
+
+.story-chapter.active {
+  display: block;
+  animation: chapterReveal 0.7s ease both;
+}
+
+@keyframes chapterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.story-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.story-navigation button {
+  margin-top: 0;
+}
+
+.story-navigation button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+#story-progress {
+  color: #e8b8c7;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+  .cinematic-story {
+    padding: 24px 14px;
+  }
+
+  .story-chapter {
+    min-height: 250px;
+  }
+
+  .story-navigation {
+    gap: 10px;
+  }
+}
+
+/* CINEMATIC STORY IMAGES */
+
+.story-image {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: 280px;
+  object-fit: cover;
+  object-position: center;
+  margin: 24px auto;
+  border-radius: 14px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 600px) {
+  .story-image {
+    height: 220px;
+    margin: 18px auto;
+  }
+}
 
 </style>
+
+
 </head>
 
 <body>
@@ -1331,94 +1478,191 @@ style="width: 100%; box-sizing: border-box; min-height: 60px; padding: 14px 16px
   </section>
 </main>
 
+
 <section class="screen" id="final-message">
-  <div class="secret-card comic-story">
+  <div class="secret-card cinematic-story">
 
-    <p class="secret-label">OUR STORY • OUR FOREVER ❤️</p>
+    <!-- CHAPTER 1: OPENING -->
+    <div class="story-chapter active" data-chapter="0">
 
-    <h1>Eight Years of Us</h1>
+  <p class="story-eyebrow">OUR STORY • OUR FOREVER</p>
 
-    <p class="comic-intro">
-      Hinata, every love story has a beginning.
-      This is ours, and my favourite chapter is still ahead. ❤️
-    </p>
+  <img
+    src="chapter1-opening.jpg"
+    alt="A romantic beginning"
+    class="story-image"
+  >
 
-    <div class="comic-image-frame">
-      <img
-        src="final-comic.png.jpg"
-        alt="Anime manga comic illustrating our love story, from the first moment on a bus to our dreams of a future together"
-        class="final-comic-image"
-      >
-    </div>
+  <h1>Eight Years of Us</h1>
 
-    <div class="comic-caption">
-      <span class="comic-number">01 — THE BEGINNING</span>
-      <h2>The Eyes That Started Everything</h2>
-      <p>
-        I never knew that one little moment on a bus would
-        become the beginning of my favourite story.
-        Your eyes caught my attention, but your heart gave
-        me a reason to stay. ❤️
-      </p>
-    </div>
+  <p class="story-description">
+    Every beautiful story has a beginning.
+    And somehow, ours became my favourite.
+  </p>
 
-    <div class="comic-caption">
-      <span class="comic-number">02 — THROUGH EVERYTHING</span>
-      <h2>We Kept Choosing Each Other</h2>
-      <p>
-        Even when life was difficult and others didn't
-        understand us, we kept finding reasons to stand
-        beside each other.
-      </p>
-    </div>
+  <p class="story-small">
+    A little journey through us, Hinata. ❤️
+  </p>
 
-    <div class="comic-caption">
-      <span class="comic-number">03 — GROWING TOGETHER</span>
-      <h2>You Helped Me See a Better Future</h2>
+</div>
+
+    <!-- CHAPTER 2: THE BEGINNING -->
+<div class="story-chapter" data-chapter="1">
+
+  <p class="story-eyebrow">CHAPTER 01 • THE BEGINNING</p>
+
+  <img
+    src="chapter2-journey.jpeg"
+    alt="Our first meeting on Bus 143"
+    class="story-image"
+  >
+
+  <h2>The Eyes That Started Everything</h2>
+
+  <p>
+    I never knew that one little moment on a bus
+    would become the beginning of my favourite story.
+  </p>
+
+  <p>
+    Your eyes caught my attention, but your heart
+    gave me a reason to stay.
+  </p>
+
+  <span class="story-highlight">
+    Bus 143. The beginning of us. ❤️
+  </span>
+
+</div>
+
+    <!-- CHAPTER 3: THE JOURNEY -->
+    <div class="story-chapter" data-chapter="2">
+
+  <p class="story-eyebrow">CHAPTER 02 • THROUGH EVERYTHING</p>
+
+  <img
+    src="chapter3-letter.png.jpeg"
+    alt="Together through every challenge"
+    class="story-image"
+  >
+
+  <h2>We Kept Choosing Each Other</h2>
+
+  <p>
+    Life wasn't always easy. There were difficult
+    moments, challenges and days when others
+    didn't understand us.
+  </p>
+
+  <p>
+    But we kept finding reasons to stand beside
+    each other. We grew, learned and kept going.
+  </p>
+
+  <span class="story-highlight">Eight years. One choice. Us.</span>
+
+</div>
+
+    <!-- CHAPTER 4: OUR COMIC -->
+    <div class="story-chapter" data-chapter="3">
+      <p class="story-eyebrow">CHAPTER 03 • OUR LITTLE UNIVERSE</p>
+      <h2>Our Story, Our Memories</h2>
+      <div class="comic-image-frame">
+        <img
+          src="final-comic.png.png"
+          alt="Our eight-year love story"
+          class="final-comic-image"
+        >
+      </div>
       <p>
         You didn't make me perfect, baby.
         You helped me realise that I could become better.
-        I want to be the man who deserves the future
-        we're dreaming of.
       </p>
+      <span class="story-highlight">And I would still choose you.</span>
     </div>
 
-    <div class="comic-caption">
-      <span class="comic-number">04 — EVERY LIFETIME</span>
-      <h2>I Would Still Choose You</h2>
-      <p>
-        If life gave me a thousand chances to start over,
-        I'd still find my way to you, fall in love with you
-        all over again, and choose you in every lifetime.
-      </p>
-    </div>
+    <!-- CHAPTER 5: THE LETTER -->
+    <div class="story-chapter" data-chapter="4">
 
-    <div class="comic-finale">
-      <p class="comic-number">OUR NEXT CHAPTER</p>
-      <h2>Hinata, My Forever ❤️</h2>
+  <p class="story-eyebrow">CHAPTER 04 • A LETTER TO YOU</p>
 
-      <p>
-        One day, I'll hold your hand as your husband,
-        look into those beautiful eyes that first stole
-        my heart, and thank the universe for giving me
-        a love like ours.
-      </p>
+  <img
+    src="chapter4-letter.jpeg"
+    alt="A heartfelt letter for Hinata"
+    class="story-image"
+  >
 
-      <p>
-        Until then, and for every day after,
-        my heart is yours, Hinata.
-      </p>
+  <h2>Hinata, My Forever</h2>
 
-      
-<h2 class="forever-title">Forever and always. ❤️</h2>
-    </div>
+  <div class="story-letter">
+    <p>
+      One day, I'll hold your hand as your husband,
+      look into those beautiful eyes that first stole
+      my heart, and thank the universe for giving me
+      a love like ours.
+    </p>
 
-    <button class="next-chapter-btn" onclick="showScreen('marriage-countdown')">
-      Our Next Chapter Begins
-    </button>
+    <p>
+      Until then, and for every day after,
+      my heart is yours, Hinata.
+    </p>
+
+    <h3>Forever and always. ❤️</h3>
+  </div>
+
+</div>
+
+    <!-- CHAPTER 6: THE NEXT CHAPTER -->
+    <div class="story-chapter" data-chapter="5">
+
+  <p class="story-eyebrow">OUR NEXT CHAPTER</p>
+
+  <img
+    src="Our Next Chapter.jpeg"
+    alt="Our future together"
+    class="story-image"
+  >
+
+  <h1>Our Forever Starts Here</h1>
+
+  <p>
+    Eight years behind us.
+    A lifetime ahead of us.
+  </p>
+
+  <p>
+    This isn't the end of our story, Hinata.
+    It's only the beginning of everything
+    we're still going to become.
+  </p>
+
+  <h2>I'll choose you. Always. ❤️</h2>
+
+  <button
+    class="next-chapter-btn"
+    onclick="showScreen('marriage-countdown')"
+  >
+    Our Next Chapter Begins
+  </button>
+
+</div>
+
+    <!-- CHAPTER NAVIGATION -->
+<div class="story-navigation">
+  <button onclick="showStoryChapter('previous')">
+    Previous
+  </button>
+
+  <span id="story-progress">01 / 06</span>
+
+  <button onclick="showStoryChapter('next')">
+    Next
+  </button>
+</div>
 
   </div>
 </section>
+
 
 
 <section class="screen" id="marriage-countdown">
@@ -1479,7 +1723,66 @@ function showScreen(id) {
   void next.offsetWidth;
   next.classList.add("active");
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+requestAnimationFrame(() => {
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+});
+}
+
+let currentStoryChapter = 0;
+
+function showStoryChapter(direction) {
+  const chapters = document.querySelectorAll(
+    "#final-message .story-chapter"
+  );
+
+  if (!chapters.length) return;
+
+  if (direction === "start") {
+    currentStoryChapter = 0;
+  } else if (
+    direction === "next" &&
+    currentStoryChapter < chapters.length - 1
+  ) {
+    currentStoryChapter++;
+  } else if (
+    direction === "previous" &&
+    currentStoryChapter > 0
+  ) {
+    currentStoryChapter--;
+  }
+
+  chapters.forEach((chapter, index) => {
+    chapter.classList.toggle(
+      "active",
+      index === currentStoryChapter
+    );
+  });
+
+  const progress = document.getElementById("story-progress");
+
+  if (progress) {
+    progress.textContent =
+      `${String(currentStoryChapter + 1).padStart(2, "0")} / ${String(chapters.length).padStart(2, "0")}`;
+  }
+
+  const navigation = document.querySelector(
+    "#final-message .story-navigation"
+  );
+
+  if (navigation) {
+    const buttons = navigation.querySelectorAll("button");
+
+    if (buttons[0]) {
+      buttons[0].disabled = currentStoryChapter === 0;
+    }
+
+    if (buttons[1]) {
+      buttons[1].disabled =
+        currentStoryChapter === chapters.length - 1;
+    }
+  }
 }
 
 const particles = document.getElementById("particles");
