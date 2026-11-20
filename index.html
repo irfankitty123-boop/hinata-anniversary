@@ -7,258 +7,360 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <script>
-    (() => {
-      const midnight = Date.parse("2026-11-26T00:00:00+05:30");
-      if (Date.now() >= midnight) return;
+(() => {
+  const ticketKey = "#b371ecf45367c94d85a75931";
+  const ticketURL = "https://irfankitty123-boop.github.io/hinata-anniversary/" + ticketKey;
 
-      // Hide the gift before the browser paints the first screen.
-      document.documentElement.style.visibility = "hidden";
+  // Her phone camera can also open the gift directly from the QR.
+  if (location.hash === ticketKey) return;
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const letter = document.createElement("dialog");
-        letter.setAttribute("aria-label", "A letter from Irfan");
-        letter.style.cssText = `
-          visibility: visible; box-sizing: border-box; margin: auto;
-          width: min(88vw, 420px); padding: 2rem 1.5rem;
-          border: 1px solid #975b69; border-radius: 18px;
-          background: #311923; color: #fff3eb; text-align: center;
-          font: 18px/1.6 Georgia, serif;
-        `;
+  document.documentElement.style.visibility = "hidden";
 
-        const style = document.createElement("style");
-        style.textContent = `
-  dialog.midnight-letter::backdrop {
-  background-color: #180e15;
-  background-image:
-    radial-gradient(ellipse at center, #79364f85, transparent 68%),
-    radial-gradient(ellipse at center, #985e4538, transparent 70%);
-  background-size: 85% 80%, 70% 75%;
-  background-position: 0% 15%, 100% 85%;
-  background-repeat: no-repeat;
-}
+  document.addEventListener("DOMContentLoaded", () => {
+    const ticket = document.createElement("dialog");
+    ticket.id = "bus-ticket";
+    ticket.setAttribute("aria-labelledby", "ticket-title");
 
-@media (prefers-reduced-motion: no-preference) {
-  dialog.midnight-letter::backdrop {
-    animation: midnight-glow 10s ease-in-out infinite alternate;
+    const style = document.createElement("style");
+    style.textContent = `
+      #bus-ticket {
+        visibility: visible; box-sizing: border-box;
+        width: min(88vw, 380px); margin: auto; padding: 0;
+        border: 0; border-radius: 12px; background: #f7e8cd;
+        color: #39232b; font: 17px/1.4 Georgia, serif;
+        box-shadow: 0 18px 60px #0006; text-align: left;
+      }
+      #bus-ticket::backdrop { background: #211019; }
+      #bus-ticket header {
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 12px 20px; background: #69283e; color: #fff2df;
+        font: bold 13px/1.3 monospace; letter-spacing: .12em;
+      }
+      #bus-ticket header strong { font-size: 24px; }
+      #bus-ticket section { padding: 24px; }
+      #bus-ticket h1 { margin: 0 0 8px; font: italic 34px Georgia, serif; }
+      #bus-ticket p { margin: 0; }
+      #bus-ticket footer {
+        padding: 18px 24px; border-top: 2px dashed #b39a80;
+      }
+      #bus-ticket button {
+        width: 100%; padding: 12px; border: 0; border-radius: 7px;
+        background: #69283e; color: #fff2df; cursor: pointer;
+        font: bold 17px Georgia, serif;
+      }
+      #bus-ticket [role="status"]:not(:empty) {
+        display: block; margin-top: 12px; font-size: 15px;
+      }
+      #bus-ticket .stamp {
+        display: inline-block; margin-top: 16px; padding: 3px 12px;
+        border: 3px double #306342; color: #306342;
+        font: bold 22px monospace; letter-spacing: .12em;
+        transform: rotate(-8deg);
+      }
+      #bus-ticket .stamp[hidden] { display: none; }
+      @media (prefers-reduced-motion: no-preference) {
+        #bus-ticket .stamp { animation: ticket-stamp .3s ease-out; }
+        @keyframes ticket-stamp {
+          from { opacity: 0; transform: scale(1.6) rotate(-14deg); }
+          to { opacity: 1; transform: scale(1) rotate(-8deg); }
+        }
+      }
+    `;
+    style.textContent += `
+  #bus-ticket section p {
+    color: #674639;
   }
-}
 
-@keyframes midnight-glow {
-  from { background-position: 0% 15%, 100% 85%; }
-  to   { background-position: 65% 70%, 35% 25%; }
-}
+  /* Warm pools of streetlight behind the ticket. */
+  #bus-ticket::backdrop {
+    background-color: #211019;
+    background-image:
+      radial-gradient(ellipse, #e8a55670 0%, #bd71372e 22%, transparent 67%),
+      radial-gradient(ellipse, #e8ad704d 0%, #ae654128 25%, transparent 68%),
+      radial-gradient(ellipse at 50% 50%, #512638 0%, #211019 72%);
+    background-size: 46% 26%, 30% 18%, 100% 100%;
+    background-repeat: no-repeat;
+    background-position: 10% 22%, 92% 76%, center;
+  }
 
   @media (prefers-reduced-motion: no-preference) {
-    dialog.midnight-letter[open] {
-      animation: letter-arrives 1.4s ease-out both;
+    #bus-ticket::backdrop {
+      animation: bus-lights-pass 9s linear infinite;
     }
 
-    @keyframes letter-arrives {
-      from {
-        opacity: 0;
-        transform: translateY(24px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    #bus-ticket[open] {
+      animation: bus-ticket-lands 850ms cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    #bus-ticket[open] h1 {
+      animation: hinata-name-appears 700ms 400ms both;
+    }
+
+    #bus-ticket[open] button {
+      animation: ticket-button-glow 1.6s 1.2s 2;
     }
   }
+
+  @keyframes bus-lights-pass {
+    from { background-position: 195% 22%, 145% 76%, center; }
+    to   { background-position: -95% 22%, -55% 76%, center; }
+  }
+
+  @keyframes bus-ticket-lands {
+    0%   { opacity: 0; transform: translateY(42px) rotate(-7deg); }
+    75%  { opacity: 1; transform: translateY(-3px) rotate(1deg); }
+    100% { opacity: 1; transform: translateY(0) rotate(0); }
+  }
+
+  @keyframes hinata-name-appears {
+    from { opacity: 0; transform: translateY(7px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes ticket-button-glow {
+    50% { box-shadow: 0 0 0 4px #bd87534d, 0 0 20px #d09a6440; }
+  }
 `;
-        style.textContent += `
-  dialog.midnight-letter[open] {
-    position: fixed;
-    isolation: isolate;
-    overflow: hidden;
+
+document.head.append(style);
+
+    ticket.innerHTML = `
+      <header><span>BUS TICKET</span><strong>143</strong></header>
+      <section>
+        <h1 id="ticket-title">For Hinata</h1>
+        <p>Admit one</p>
+        <span class="stamp" hidden>VALID</span>
+      </section>
+      <footer>
+        <button type="button">Scan my ticket</button>
+        <input type="file" accept="image/*" hidden>
+        <small role="status"></small>
+      </footer>
+    `;
+
+    document.body.append(ticket);
+    ticket.addEventListener("cancel", event => event.preventDefault());
+    ticket.showModal();
+const effects = document.createElement("style");
+effects.textContent = `
+  #bus-ticket::backdrop {
+    background: radial-gradient(ellipse at 50% 45%, #542538, #211019 72%);
     animation: none;
   }
 
+  #bus-ticket section p { color: #674639; }
+
+  #bus-ticket footer {
+    position: relative;
+    border-top: 1px dashed #ac826c;
+  }
+
+  #bus-ticket .heart-trail {
+    position: absolute;
+    top: -13px;
+    left: 8%;
+    width: 84%;
+    height: 24px;
+    pointer-events: none;
+    color: #983c58;
+    font: 18px/24px Georgia, serif;
+  }
+
+  .heart-trail span {
+    position: absolute;
+    opacity: 0;
+  }
+
+  .heart-trail .spark:nth-child(2) { left: 25%; --delay: 0.5s; }
+  .heart-trail .spark:nth-child(3) { left: 50%; --delay: 1s; }
+  .heart-trail .spark:nth-child(4) { left: 75%; --delay: 1.5s; }
+
   @media (prefers-reduced-motion: no-preference) {
-    /* The folded pocket sits in front of the letter. */
-    dialog.midnight-letter::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-      background:
-        linear-gradient(32deg, #87394f 49.5%, transparent 50%) left / 51% 100% no-repeat,
-        linear-gradient(-32deg, #783046 49.5%, transparent 50%) right / 51% 100% no-repeat,
-        #612538;
-      animation: envelope-pocket 3.2s both;
+    #bus-ticket[open] {
+      animation: ticket-settles 700ms cubic-bezier(.2,.8,.2,1) both;
     }
 
-    /* The gold seal moves with the triangular flap. */
-    dialog.midnight-letter::after {
-      content: "♥";
-      position: absolute;
-      inset: 0 0 auto;
-      height: 69%;
-      z-index: 3;
-      display: grid;
-      place-items: end center;
-      box-sizing: border-box;
-      padding-bottom: 1.1rem;
-      color: #602438;
-      font: 19px Georgia, serif;
-      pointer-events: none;
-      background:
-        radial-gradient(circle at 50% calc(100% - 1.75rem),
-          #e7bc78 0 17px, #af8044 18px, transparent 19px),
-        linear-gradient(155deg, #ab5368, #80354c);
-      clip-path: polygon(0 0, 100% 0, 100% 24%, 50% 100%, 0 24%);
-      transform-origin: center top;
-      animation: envelope-flap 3.2s both;
+    .heart-trail .arrow {
+      animation: cupid-crosses 6s 750ms ease-in-out infinite;
     }
 
-    dialog.midnight-letter > :not(style) {
-      animation: paper-rises 3.2s both;
-    }
-
-    @keyframes envelope-flap {
-      0%, 28% { transform: perspective(800px) rotateX(0); }
-      60%, 100% { transform: perspective(800px) rotateX(100deg); }
-    }
-
-    @keyframes envelope-pocket {
-      0%, 47% { transform: translateY(0); }
-      100% { transform: translateY(101%); }
-    }
-
-    @keyframes paper-rises {
-      0%, 44% { opacity: 0; transform: translateY(32px); }
-      78%, 100% { opacity: 1; transform: translateY(0); }
+    .heart-trail .spark {
+      animation: little-heart 6s calc(750ms + var(--delay)) ease-out infinite;
     }
   }
-`;
-document.head.append(style);
-        letter.className = "midnight-letter";
 
-        letter.innerHTML = `
-          <style>
-  @media (prefers-reduced-motion: no-preference) {
-    .midnight-letter .letter-heart {
-      display: inline-block;
-      animation: letter-heartbeat 2.4s ease-in-out infinite;
-    }
-
-    @keyframes letter-heartbeat {
-      0%, 24%, 48%, 100% { transform: scale(1); }
-      12% { transform: scale(1.25); }
-      36% { transform: scale(1.15); }
-    }
+  @keyframes ticket-settles {
+    from { opacity: 0; transform: translateY(24px) rotate(-3deg); }
+    to   { opacity: 1; transform: translateY(0) rotate(0); }
   }
-</style>
-<p style="color:#efb9bd">For Hinata <span class="letter-heart" aria-hidden="true">♡</span></p>
-          <h1 style="font:italic 32px Georgia,serif">Remember Bus 143?</h1>
-          <p>You threw me a little letter that said “hi.”<br>
-          Nine years later, it’s my turn to leave you one.</p>
-          <p>I wish I could sit beside you while you open it.</p>
-          <div role="timer" style="font:24px monospace;color:#ffd5cd"></div>
-          <p style="font-size:15px">Opens November 26 at midnight · Sri Lanka</p>
-          <p>Love, Irfan</p>
-        `;
 
-        document.body.append(letter);
-        letter.addEventListener("cancel", event => event.preventDefault());
-        letter.showModal();
+ #bus-ticket .heart-trail {
+  container-type: inline-size;
+}
 
-        const timer = letter.querySelector('[role="timer"]');
-        function update() {
-          const seconds = Math.ceil((midnight - Date.now()) / 1000);
-          if (seconds <= 0) {
-            location.reload();
-            return;
-          }
-          const values = [
-  Math.floor(seconds / 86400),
-  Math.floor(seconds / 3600) % 24,
-  Math.floor(seconds / 60) % 60,
-  seconds % 60
-];
+#bus-ticket .heart-trail .arrow {
+  left: 0;
+  animation-timing-function: linear;
+  will-change: transform, opacity;
+}
 
-const labels = ["Days", "Hours", "Mins", "Secs"];
+@keyframes cupid-crosses {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
 
-// Create the four tiles once.
-if (!timer.children.length) {
-  timer.style.cssText = `
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 5px;
-    max-width: 310px;
-    margin: 20px auto;
-  `;
+  6%, 88% {
+    opacity: 1;
+  }
 
-  for (const label of labels) {
-    const tile = document.createElement("div");
-    tile.style.cssText = `
-      padding: 9px 0;
-      text-align: center;
-      border: 1px solid #93566a;
-      border-radius: 8px;
-      background: linear-gradient(#542737, #351a25);
-    `;
+  76%, 100% {
+    transform: translateX(calc(100cqw - 40px));
+  }
 
-    tile.innerHTML = `
-      <div class="clock-window" style="
-        position: relative;
-        overflow: hidden;
-        height: 1.3em;
-        color: #ffe3d7;
-        font: 24px/1.3 monospace;
-      "></div>
-      <small style="color: #e9b6bd; font: 12px Georgia, serif;">
-        ${label}
-      </small>
-    `;
-
-    timer.append(tile);
+  100% {
+    opacity: 0;
   }
 }
 
-// Roll only the numbers that changed.
-const slots = timer.querySelectorAll(".clock-window");
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  @keyframes little-heart {
+    0%       { opacity: 0; transform: translateY(0) scale(.6); }
+    5%       { opacity: .85; }
+    28%,100% { opacity: 0; transform: translateY(-22px) scale(1); }
+  }
+`;
+document.head.append(effects);
 
-slots.forEach((slot, index) => {
-  const value = String(values[index]).padStart(2, "0");
-  if (slot.dataset.value === value) return;
-  slot.dataset.value = value;
+const trail = document.createElement("div");
+trail.className = "heart-trail";
+trail.setAttribute("aria-hidden", "true");
+trail.innerHTML = `
+  <span class="arrow">
+  <img src="./hinata-face.png" alt=""
+       style="display:block; width:40px; height:40px; object-fit:contain; margin-top:-8px;">
+</span>
+  <span class="spark">♡</span>
+  <span class="spark">♥</span>
+  <span class="spark">♡</span>
+`;
+ticket.querySelector("footer").prepend(trail);
 
-  const previous = slot.lastElementChild;
-  const digit = document.createElement("span");
-  digit.textContent = value;
-  digit.style.cssText = "position: absolute; inset: 0;";
+ticket.showModal();
+const anniversary = Date.parse("2026-11-26T00:00:00+05:30");
 
-  const touchScreen = window.matchMedia("(pointer: coarse)").matches;
-if (!previous || reduceMotion || touchScreen) {
-    slot.replaceChildren(digit);
+const timerBar = document.createElement("div");
+timerBar.style.cssText = `
+  padding: 8px 12px;
+  background: #431b2c;
+  color: #ffe4d1;
+  text-align: center;
+  font: 12px/1.5 Georgia, serif;
+`;
+
+const timerLabel = document.createElement("span");
+timerLabel.textContent = "Our anniversary in ";
+
+const timerDigits = document.createElement("span");
+timerDigits.setAttribute("role", "timer");
+timerDigits.style.cssText = `
+  font: bold 12px/1.5 monospace;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+`;
+
+timerBar.append(timerLabel, timerDigits);
+ticket.prepend(timerBar);
+
+function updateAnniversaryTimer() {
+  const left = Math.ceil((anniversary - Date.now()) / 1000);
+
+  if (left <= 0) {
+    timerBar.textContent = "Happy anniversary, Hinata ♡";
+    clearInterval(timerInterval);
     return;
   }
 
-  previous.setAttribute("aria-hidden", "true");
-  slot.append(digit);
+  const days = Math.floor(left / 86400);
+  const two = value => String(value).padStart(2, "0");
+  const hours = two(Math.floor(left / 3600) % 24);
+  const minutes = two(Math.floor(left / 60) % 60);
+  const seconds = two(left % 60);
 
-  const timing = { duration: 280, easing: "ease-out", fill: "forwards" };
+  timerDigits.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
 
-  previous.animate([
-    { transform: "translateY(0)", opacity: 1 },
-    { transform: "translateY(-100%)", opacity: 0 }
-  ], timing).onfinish = () => previous.remove();
+const timerInterval = setInterval(updateAnniversaryTimer, 1000);
+updateAnniversaryTimer();
+ticket.addEventListener("close", () => clearInterval(timerInterval), { once: true });
 
-  digit.animate([
-    { transform: "translateY(100%)", opacity: 0 },
-    { transform: "translateY(0)", opacity: 1 }
-  ], { duration: 280, easing: "ease-out" });
-});
+ticket.showModal();
+    const button = ticket.querySelector("button");
+    const picker = ticket.querySelector("input");
+    const status = ticket.querySelector('[role="status"]');
+
+    function loadScanner() {
+      if (window.jsQR) return Promise.resolve();
+      return new Promise((resolve, reject) => {
+        const script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.append(script);
+      });
+    }
+
+    button.addEventListener("click", () => {
+      status.textContent = "Choose the QR image Irfan sent you.";
+      picker.click();
+    });
+
+    picker.addEventListener("change", async () => {
+      const file = picker.files[0];
+      if (!file) return;
+      picker.value = "";
+      button.disabled = true;
+      status.textContent = "Checking your ticket…";
+      const imageURL = URL.createObjectURL(file);
+      let valid = false;
+
+      try {
+        const image = new Image();
+        image.src = imageURL;
+        await Promise.all([image.decode(), loadScanner()]);
+
+        const scale = Math.min(1, 1200 / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        const pixels = context.getImageData(0, 0, canvas.width, canvas.height);
+        const qr = window.jsQR(pixels.data, pixels.width, pixels.height);
+        valid = qr?.data === ticketURL;
+
+        if (!valid) {
+          status.textContent = "Try the original QR image Irfan sent you.";
+          return;
         }
 
-        update();
-        setInterval(update, 1000);
-        document.addEventListener("visibilitychange", update);
-      }, { once: true });
-    })();
-  </script>
+        ticket.querySelector(".stamp").hidden = false;
+        status.textContent = "Ticket accepted ♡";
+        setTimeout(() => {
+          ticket.close();
+          ticket.remove();
+          document.documentElement.style.visibility = "";
+        }, 950);
+      } catch {
+        status.textContent = "Couldn’t read the image. Check your connection and try again.";
+      } finally {
+        URL.revokeObjectURL(imageURL);
+        button.disabled = valid;
+      }
+    });
+  }, { once: true });
+})();
+</script>
   
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
