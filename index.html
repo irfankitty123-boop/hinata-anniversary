@@ -230,7 +230,8 @@ slots.forEach((slot, index) => {
   digit.textContent = value;
   digit.style.cssText = "position: absolute; inset: 0;";
 
-  if (!previous || reduceMotion) {
+  const touchScreen = window.matchMedia("(pointer: coarse)").matches;
+if (!previous || reduceMotion || touchScreen) {
     slot.replaceChildren(digit);
     return;
   }
