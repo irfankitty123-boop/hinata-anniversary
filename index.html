@@ -3,6 +3,262 @@
 <html lang="en">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23210c1b'/%3E%3Ctext x='50' y='70' font-size='65' text-anchor='middle'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E">
 <head>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>
+    (() => {
+      const midnight = Date.parse("2026-11-26T00:00:00+05:30");
+      if (Date.now() >= midnight) return;
+
+      // Hide the gift before the browser paints the first screen.
+      document.documentElement.style.visibility = "hidden";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const letter = document.createElement("dialog");
+        letter.setAttribute("aria-label", "A letter from Irfan");
+        letter.style.cssText = `
+          visibility: visible; box-sizing: border-box; margin: auto;
+          width: min(88vw, 420px); padding: 2rem 1.5rem;
+          border: 1px solid #975b69; border-radius: 18px;
+          background: #311923; color: #fff3eb; text-align: center;
+          font: 18px/1.6 Georgia, serif;
+        `;
+
+        const style = document.createElement("style");
+        style.textContent = `
+  dialog.midnight-letter::backdrop {
+  background-color: #180e15;
+  background-image:
+    radial-gradient(ellipse at center, #79364f85, transparent 68%),
+    radial-gradient(ellipse at center, #985e4538, transparent 70%);
+  background-size: 85% 80%, 70% 75%;
+  background-position: 0% 15%, 100% 85%;
+  background-repeat: no-repeat;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  dialog.midnight-letter::backdrop {
+    animation: midnight-glow 10s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes midnight-glow {
+  from { background-position: 0% 15%, 100% 85%; }
+  to   { background-position: 65% 70%, 35% 25%; }
+}
+
+  @media (prefers-reduced-motion: no-preference) {
+    dialog.midnight-letter[open] {
+      animation: letter-arrives 1.4s ease-out both;
+    }
+
+    @keyframes letter-arrives {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+`;
+        style.textContent += `
+  dialog.midnight-letter[open] {
+    position: fixed;
+    isolation: isolate;
+    overflow: hidden;
+    animation: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* The folded pocket sits in front of the letter. */
+    dialog.midnight-letter::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      background:
+        linear-gradient(32deg, #87394f 49.5%, transparent 50%) left / 51% 100% no-repeat,
+        linear-gradient(-32deg, #783046 49.5%, transparent 50%) right / 51% 100% no-repeat,
+        #612538;
+      animation: envelope-pocket 3.2s both;
+    }
+
+    /* The gold seal moves with the triangular flap. */
+    dialog.midnight-letter::after {
+      content: "♥";
+      position: absolute;
+      inset: 0 0 auto;
+      height: 69%;
+      z-index: 3;
+      display: grid;
+      place-items: end center;
+      box-sizing: border-box;
+      padding-bottom: 1.1rem;
+      color: #602438;
+      font: 19px Georgia, serif;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 50% calc(100% - 1.75rem),
+          #e7bc78 0 17px, #af8044 18px, transparent 19px),
+        linear-gradient(155deg, #ab5368, #80354c);
+      clip-path: polygon(0 0, 100% 0, 100% 24%, 50% 100%, 0 24%);
+      transform-origin: center top;
+      animation: envelope-flap 3.2s both;
+    }
+
+    dialog.midnight-letter > :not(style) {
+      animation: paper-rises 3.2s both;
+    }
+
+    @keyframes envelope-flap {
+      0%, 28% { transform: perspective(800px) rotateX(0); }
+      60%, 100% { transform: perspective(800px) rotateX(100deg); }
+    }
+
+    @keyframes envelope-pocket {
+      0%, 47% { transform: translateY(0); }
+      100% { transform: translateY(101%); }
+    }
+
+    @keyframes paper-rises {
+      0%, 44% { opacity: 0; transform: translateY(32px); }
+      78%, 100% { opacity: 1; transform: translateY(0); }
+    }
+  }
+`;
+document.head.append(style);
+        letter.className = "midnight-letter";
+
+        letter.innerHTML = `
+          <style>
+  @media (prefers-reduced-motion: no-preference) {
+    .midnight-letter .letter-heart {
+      display: inline-block;
+      animation: letter-heartbeat 2.4s ease-in-out infinite;
+    }
+
+    @keyframes letter-heartbeat {
+      0%, 24%, 48%, 100% { transform: scale(1); }
+      12% { transform: scale(1.25); }
+      36% { transform: scale(1.15); }
+    }
+  }
+</style>
+<p style="color:#efb9bd">For Hinata <span class="letter-heart" aria-hidden="true">♡</span></p>
+          <h1 style="font:italic 32px Georgia,serif">Remember Bus 143?</h1>
+          <p>You threw me a little letter that said “hi.”<br>
+          Nine years later, it’s my turn to leave you one.</p>
+          <p>I wish I could sit beside you while you open it.</p>
+          <div role="timer" style="font:24px monospace;color:#ffd5cd"></div>
+          <p style="font-size:15px">Opens November 26 at midnight · Sri Lanka</p>
+          <p>Love, Irfan</p>
+        `;
+
+        document.body.append(letter);
+        letter.addEventListener("cancel", event => event.preventDefault());
+        letter.showModal();
+
+        const timer = letter.querySelector('[role="timer"]');
+        function update() {
+          const seconds = Math.ceil((midnight - Date.now()) / 1000);
+          if (seconds <= 0) {
+            location.reload();
+            return;
+          }
+          const values = [
+  Math.floor(seconds / 86400),
+  Math.floor(seconds / 3600) % 24,
+  Math.floor(seconds / 60) % 60,
+  seconds % 60
+];
+
+const labels = ["Days", "Hours", "Mins", "Secs"];
+
+// Create the four tiles once.
+if (!timer.children.length) {
+  timer.style.cssText = `
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 5px;
+    max-width: 310px;
+    margin: 20px auto;
+  `;
+
+  for (const label of labels) {
+    const tile = document.createElement("div");
+    tile.style.cssText = `
+      padding: 9px 0;
+      text-align: center;
+      border: 1px solid #93566a;
+      border-radius: 8px;
+      background: linear-gradient(#542737, #351a25);
+    `;
+
+    tile.innerHTML = `
+      <div class="clock-window" style="
+        position: relative;
+        overflow: hidden;
+        height: 1.3em;
+        color: #ffe3d7;
+        font: 24px/1.3 monospace;
+      "></div>
+      <small style="color: #e9b6bd; font: 12px Georgia, serif;">
+        ${label}
+      </small>
+    `;
+
+    timer.append(tile);
+  }
+}
+
+// Roll only the numbers that changed.
+const slots = timer.querySelectorAll(".clock-window");
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+slots.forEach((slot, index) => {
+  const value = String(values[index]).padStart(2, "0");
+  if (slot.dataset.value === value) return;
+  slot.dataset.value = value;
+
+  const previous = slot.lastElementChild;
+  const digit = document.createElement("span");
+  digit.textContent = value;
+  digit.style.cssText = "position: absolute; inset: 0;";
+
+  if (!previous || reduceMotion) {
+    slot.replaceChildren(digit);
+    return;
+  }
+
+  previous.setAttribute("aria-hidden", "true");
+  slot.append(digit);
+
+  const timing = { duration: 280, easing: "ease-out", fill: "forwards" };
+
+  previous.animate([
+    { transform: "translateY(0)", opacity: 1 },
+    { transform: "translateY(-100%)", opacity: 0 }
+  ], timing).onfinish = () => previous.remove();
+
+  digit.animate([
+    { transform: "translateY(100%)", opacity: 0 },
+    { transform: "translateY(0)", opacity: 1 }
+  ], { duration: 280, easing: "ease-out" });
+});
+        }
+
+        update();
+        setInterval(update, 1000);
+        document.addEventListener("visibilitychange", update);
+      }, { once: true });
+    })();
+  </script>
+  
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>For Hinata — Eight Years of Us</title>
